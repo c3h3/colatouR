@@ -42,6 +42,10 @@ getFlightsData <- function(fareType="C",  # C=business class &Ｙ=econemic class
                            originCode="TN",
                            destinationCode="SEA",
                            bankName="全部") {
+
+  journeyType %<>% `Encoding<-`("UTF-8")
+  bankName %<>% `Encoding<-`("UTF-8")
+
   url = paste0("http://www.colatour.com.tw/C10C_AirTicket/C10C_01_FareChoose.aspx?",
                "FareType=",fareType,
                "&JourneyType=",URLdecode(URLdecode(journeyType)),
@@ -61,6 +65,8 @@ getFlightsData <- function(fareType="C",  # C=business class &Ｙ=econemic class
   # tables[[8]] %>% View
 
   data_table_filter = sapply(tables, function(tab){
+    checkStr = "序號"
+    checkStr %<>% `Encoding<-`("UTF-8")
     tab[1,1] == "序號"
   })
 
